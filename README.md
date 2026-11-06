@@ -5,12 +5,13 @@ A Laravel 13 blog project based on the structure and functionality of the
 
 ## Local setup
 
-Requirements: PHP 8.3 or later, Composer, Node.js, and npm.
+Requirements: PHP 8.3 or later, Composer, Node.js, npm, and Docker Compose.
 
 ```bash
+docker compose up -d
 composer setup
 php artisan serve
 ```
 
-The initial Laravel setup uses SQLite. Database and authentication changes will
-be added in later project stages.
+MariaDB is available on `127.0.0.1:33062`. The local database credentials are
+configured in `.env.example`.

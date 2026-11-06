@@ -1,0 +1,14 @@
+services:
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: example
+      MARIADB_DATABASE: blog
+    ports:
+      - "33062:3306"
+    volumes:
+      - blogdata:/var/lib/mysql
+
+volumes:
+  blogdata:
