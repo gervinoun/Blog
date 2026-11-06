@@ -3,18 +3,22 @@
 namespace Tests\Unit;
 
 use App\Models\Post;
-use Illuminate\Database\Eloquent\MassAssignmentException;
 use PHPUnit\Framework\TestCase;
 
 class PostTest extends TestCase
 {
-    public function test_post_attributes_are_not_mass_assignable_until_fields_are_defined(): void
+    public function test_post_only_allows_known_attributes_for_mass_assignment(): void
     {
         $post = new Post;
 
-        $this->assertSame(['*'], $post->getGuarded());
+        $post->fill([
+            'title' => 'A sample title',
+            'body' => 'Sample body',
+            'user_id' => 1,
+            'is_admin' => true,
+        ]);
 
-        $this->expectException(MassAssignmentException::class);
-        $post->fill(['title' => 'Untrusted title']);
+        $this->assertSame(['user_id', 'title', 'body'], $post->getFillable());
+        $this->assertArrayNotHasKey('is_admin', $post->getAttributes());
     }
 }
