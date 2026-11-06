@@ -15,6 +15,10 @@
         </div>
 
         <div class="navbar-end gap-2">
+            <div class="hidden lg:block">
+                @include('layouts.theme-selector', ['selectClass' => 'select select-bordered select-sm w-36'])
+            </div>
+
             @guest
                 <div class="hidden items-center gap-2 lg:flex">
                     <a href="{{ route('login') }}" class="btn btn-ghost">{{ __('Login') }}</a>
@@ -35,6 +39,9 @@
                     </svg>
                 </summary>
                 <ul class="menu dropdown-content z-10 mt-3 w-52 rounded-box bg-base-100 p-2 shadow">
+                    <li class="px-2 py-1">
+                        @include('layouts.theme-selector', ['selectClass' => 'select select-bordered select-sm w-full'])
+                    </li>
                     <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
                     <li><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
                     @guest

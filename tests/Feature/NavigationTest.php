@@ -14,7 +14,12 @@ class NavigationTest extends TestCase
     {
         $response = $this->get(route('home'));
 
+        $this->assertSame(2, substr_count($response->getContent(), 'data-theme-selector'));
+
         $response->assertOk()
+            ->assertSee('data-theme="cyberpunk"', false)
+            ->assertSee('data-theme-selector', false)
+            ->assertSee('value="cyberpunk"', false)
             ->assertSee(route('home', absolute: false))
             ->assertSee(route('dashboard', absolute: false))
             ->assertSee(route('login', absolute: false))
@@ -28,7 +33,11 @@ class NavigationTest extends TestCase
 
         $response = $this->actingAs($user)->get(route('dashboard'));
 
+        $this->assertSame(2, substr_count($response->getContent(), 'data-theme-selector'));
+
         $response->assertOk()
+            ->assertSee('data-theme="cyberpunk"', false)
+            ->assertSee('data-theme-selector', false)
             ->assertSee(route('home', absolute: false))
             ->assertSee(route('dashboard', absolute: false))
             ->assertSee(route('profile.edit', absolute: false))
