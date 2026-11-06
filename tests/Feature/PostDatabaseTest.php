@@ -41,4 +41,13 @@ class PostDatabaseTest extends TestCase
         $this->assertDatabaseCount('users', 1);
         $this->assertDatabaseHas('posts', ['user_id' => 1]);
     }
+
+    public function test_database_seeder_can_run_twice_without_duplicate_test_users(): void
+    {
+        $this->seed();
+        $this->seed();
+
+        $this->assertDatabaseCount('users', 1);
+        $this->assertDatabaseHas('users', ['email' => 'test@example.com']);
+    }
 }

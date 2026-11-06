@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [PublicController::class, 'index'])->name('home');
+Route::get('/buttons', [PublicController::class, 'buttons'])->name('buttons');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
